@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/catalog"
+        android:title="Каталог"
+        android:icon="@mipmap/ic_launcher_round" />
+
+    <item
+        android:id="@+id/cart"
+        android:title="Корзина"
+        android:icon="@mipmap/ic_launcher_round" />
+
+    <item
+        android:id="@+id/admin_panel"
+        android:title="Админ-панель"
+        android:icon="@mipmap/ic_launcher_round" />
+</menu>
