@@ -6,17 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_margin="10dp"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@drawable/curved_toolbar" />
-
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
-        android:layout_below="@id/toolbar"
         android:layout_height="match_parent"
         android:layout_above="@id/navbar">
 

@@ -6,17 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
-import android.widget.Toolbar;
 
 import com.food.delivery.R;
 import com.food.delivery.fragments.AdminProfileFragment;
 import com.food.delivery.fragments.CartFragment;
 import com.food.delivery.fragments.CatalogFragment;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     BottomNavigationView bottomNavigationView;
-
     CartFragment cartFragment = new CartFragment();
     CatalogFragment catalogFragment = new CatalogFragment();
     AdminProfileFragment adminProfileFragment = new AdminProfileFragment();
@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        setSupportActionBar(findViewById(R.id.toolbar));
 
         bottomNavigationView = findViewById(R.id.navbar);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
