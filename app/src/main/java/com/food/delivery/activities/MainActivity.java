@@ -12,6 +12,7 @@ import com.food.delivery.fragments.AdminProfileFragment;
 import com.food.delivery.fragments.CartFragment;
 import com.food.delivery.fragments.CatalogFragment;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView = findViewById(R.id.navbar);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.catalog);
+
+        catalogFragment.setNavigationView(bottomNavigationView);
+        cartFragment.setNavigationView(bottomNavigationView);
     }
 
     @Override

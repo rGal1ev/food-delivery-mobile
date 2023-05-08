@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.OrderFormActivity"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Оформление заказа"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/header_description"
+        android:layout_below="@id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Перед началом оформления заказа не забудьте проверить корзину"
+        android:textColor="@color/dark_gray" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_container"
+        android:layout_below="@id/header_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Имя"
+        android:layout_marginTop="10dp"
+        app:startIconDrawable="@drawable/profile_icon"
+        app:endIconMode="clear_text"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_tf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phone_container"
+        android:layout_below="@id/name_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Номер телефона"
+        android:layout_marginTop="10dp"
+        app:endIconMode="clear_text"
+        app:prefixText="+7 "
+        app:startIconDrawable="@drawable/phone"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phone_tf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_container"
+        android:layout_below="@id/phone_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Электронная почта"
+        android:layout_marginTop="10dp"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/email"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_tf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/location_container"
+        android:layout_below="@id/email_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Адрес доставки"
+        android:layout_marginTop="10dp"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/location"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/location_tf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/food_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Всего товаров:"
+        android:textSize="18sp"
+        android:layout_above="@id/total_food_price"/>
+
+    <TextView
+        android:id="@+id/total_food_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Общая цена:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/send_order_b"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/send_order_b"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cornerRadius="5dp"
+        android:textSize="16sp"
+        android:text="Отправить заказ"
+        android:layout_above="@id/close_form_b" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/close_form_b"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cornerRadius="5dp"
+        android:textSize="16sp"
+        android:text="Отменить"
+        app:strokeColor="@color/accent"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"/>
+
+
+
+</RelativeLayout>

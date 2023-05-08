@@ -11,41 +11,86 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp">
 
-        <ImageView
-            android:id="@+id/food_image"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/ic_launcher" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/food_image"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher" />
+
+        </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:layout_below="@id/food_image_container"
+        android:layout_below="@id/title_hint"
         android:id="@+id/food_title"
-        android:layout_marginTop="25dp"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:text="Название еды"
-        android:gravity="center"/>
+        android:gravity="left"/>
 
     <TextView
+        android:id="@+id/title_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Название"
+        android:layout_below="@id/food_image_container"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/description_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Описание"
         android:layout_below="@id/food_title"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp" />
+
+
+    <TextView
+        android:layout_below="@id/description_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/food_description"
         android:textSize="20sp"
-        android:layout_centerHorizontal="true"
         android:text="Описание еды"
-        android:gravity="center"/>
+        android:gravity="left"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_below="@id/food_description"
-        android:id="@+id/add_to_cart_button"
-        android:layout_marginTop="25dp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Добавить в корзину"  />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/food_description">
+
+            <TextView
+                android:id="@+id/food_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="400 руб"
+                android:textColor="@color/accent_dark"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginRight="20dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_to_cart_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cornerRadius="5dp"
+            style="?attr/materialButtonOutlinedStyle"
+            app:strokeColor="@color/accent"
+            android:text="Добавить в корзину"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
 </RelativeLayout>

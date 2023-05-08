@@ -19,6 +19,8 @@ import com.food.delivery.R;
 import com.food.delivery.adapters.FoodCatalogListAdapter;
 import com.food.delivery.models.network.Food;
 import com.food.delivery.network.NetworkService;
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,7 @@ public class CatalogFragment extends Fragment {
     private ArrayList<Food> foodList;
     private RecyclerView foodCatalogListRecyclerView;
     private ProgressBar progressBar;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,7 @@ public class CatalogFragment extends Fragment {
     }
 
     public void renderFoodCatalogList(Context context, ArrayList<Food> foodList, RecyclerView foodRecyclerView) {
-        FoodCatalogListAdapter foodCatalogListAdapter = new FoodCatalogListAdapter(context, foodList, this.app);
+        FoodCatalogListAdapter foodCatalogListAdapter = new FoodCatalogListAdapter(context, foodList, this.app, bottomNavigationView);
 
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         foodRecyclerView.setAdapter(foodCatalogListAdapter);
@@ -89,5 +92,9 @@ public class CatalogFragment extends Fragment {
                     @Override
                     public void onFailure(Call<List<Food>> call, Throwable t) {}
                 });
+    }
+
+    public void setNavigationView(BottomNavigationView bottomNavigationView) {
+        this.bottomNavigationView = bottomNavigationView;
     }
 }

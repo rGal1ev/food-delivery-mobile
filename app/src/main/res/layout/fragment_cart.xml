@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.CartFragment">
 
     <RelativeLayout
@@ -10,12 +11,70 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/cart_info"
+            android:id="@+id/header_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:text="Корзина"
+            android:textSize="24sp"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:id="@+id/food_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Всего товаров:"
+            android:textSize="18sp"
+            android:layout_above="@id/total_food_price"/>
+
+        <TextView
+            android:id="@+id/total_food_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Общая цена:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            android:layout_above="@id/open_order_form_b"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/open_order_form_b"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cornerRadius="5dp"
+            android:text="Оформить заказ"
+            android:textSize="16sp"
+            app:icon="@drawable/circle_add"
+            app:iconGravity="textStart"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/food_cart_rv"
+            android:layout_below="@id/header_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/open_order_form_b"/>
+
+        <TextView
+            android:id="@+id/empty_cart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
             android:layout_centerVertical="true"
-            android:text="Корзина" />
+            android:layout_centerHorizontal="true"
+            android:text="Корзина пока пустая"/>
+
+        <TextView
+            android:id="@+id/empty_cart_subtitle"
+            android:layout_below="@id/empty_cart_title"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Добавьте товары, чтобы совершить заказ"
+            android:textSize="18sp" />
 
     </RelativeLayout>
 

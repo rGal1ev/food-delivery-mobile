@@ -4,22 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    android:background="@color/white">
 
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
+    <RelativeLayout
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/navbar">
+        android:layout_above="@id/navbar"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navbar"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/accent_dark"
-        app:menu="@menu/main_menu"/>
+        android:background="@color/white"
+        app:menu="@menu/main_menu"
+        app:labelVisibilityMode="selected"
+        android:elevation="15dp"
+        app:itemActiveIndicatorStyle="@color/accent"
+        app:itemBackground="@color/white"/>
 
 </RelativeLayout>

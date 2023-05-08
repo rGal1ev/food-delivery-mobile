@@ -12,6 +12,6 @@
 
     <item
         android:id="@+id/admin_panel"
-        android:title="Админ-панель"
-        android:icon="@drawable/admin_panel_icon" />
+        android:title="Профиль"
+        android:icon="@drawable/profile_icon" />
 </menu>

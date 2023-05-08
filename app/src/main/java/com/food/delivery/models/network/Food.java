@@ -20,6 +20,16 @@ public class Food {
     @Expose
     private String imageURL;
 
+    @SerializedName("price")
+    @Expose
+    private double price;
+
+    private int count = 1;
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -36,6 +46,10 @@ public class Food {
         this.imageURL = imageURL;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }
@@ -50,5 +64,13 @@ public class Food {
 
     public String getImageURL() {
         return imageURL;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getCount() {
+        return count;
     }
 }
