@@ -21,6 +21,7 @@ import com.food.delivery.activities.OrderFormActivity;
 import com.food.delivery.adapters.FoodCartListAdapter;
 import com.food.delivery.models.network.Food;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.w3c.dom.Text;
 
@@ -58,8 +59,13 @@ public class CartFragment extends Fragment {
 
         openMakeOrderFormB.setOnClickListener(event -> {
             if (!(this.app.getCartState().getBody().size() == 0)) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), OrderFormActivity.class);
-                startActivity(intent, null);
+                if (app.getUSER_TOKEN().isEmpty() || app.getUSER_TOKEN() == null) {
+                    Snackbar snackbar = Snackbar.make(view, "Для создания заказа необходимо авторизоваться", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                } else {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), OrderFormActivity.class);
+                    startActivity(intent, null);
+                }
             }
         });
 
@@ -117,7 +123,7 @@ public class CartFragment extends Fragment {
             }
 
             this.totalFoodCountTV.setText("Всего товаров: " + foodTotalCount);
-            this.totalFoodPriceTV.setText("Общая цена: " + foodTotalPrice + " руб.");
+            this.totalFoodPriceTV.setText("Общая цена: " + Math.round(foodTotalPrice) + " руб");
 
         } else {
             this.totalFoodPriceTV.setVisibility(View.GONE);

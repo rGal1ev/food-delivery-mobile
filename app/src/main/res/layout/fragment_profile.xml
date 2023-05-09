@@ -1,80 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.AdminProfileFragment">
+    tools:context=".fragments.ProfileFragment">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Добрый день,"
+        android:textStyle="bold"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_below="@id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        android:text="Салатов Антон" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profile_order_tablayout_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username"
+        android:elevation="0dp"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="5dp">
 
-        <TextView
-            android:id="@+id/header_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Войти в профиль"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="250dp"/>
+        <com.google.android.material.tabs.TabLayout
+            android:elevation="0dp"
 
-        <TextView
-            android:id="@+id/header_description"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/dark_gray"
-            android:text="Профили доступны только для сотрудников ресторана"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/header_title" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_below="@id/login_container"
-            android:layout_marginTop="5dp"
-            android:id="@+id/password_container"
+            android:id="@+id/profile_order_tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Пароль"
-            app:endIconMode="password_toggle"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+            android:background="@color/light_gray">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Текущие заказы" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="История заказов" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_container"
-            android:layout_below="@id/header_description"
+        </com.google.android.material.tabs.TabLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:elevation="0dp"
+        android:layout_marginTop="5dp"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/profile_order_tablayout_container"
+        android:layout_above="@id/logout_user"
+        android:layout_marginBottom="10dp">
+
+        <FrameLayout
+            android:id="@+id/profile_orders_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Логин"
-            app:endIconMode="clear_text"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+            android:layout_height="match_parent"
+            android:background="@color/light_gray" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+    </androidx.cardview.widget.CardView>
 
-        </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logout_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cornerRadius="5dp"
+        android:text="Выйти"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_alignParentBottom="true"
+        android:textSize="16sp"
+        app:strokeColor="@color/accent"/>
 
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/login_button"
-            android:layout_below="@id/password_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Войти"
-            app:cornerRadius="5dp"
-            app:icon="@drawable/profile_icon"
-            app:iconGravity="textStart"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"/>
-
-    </RelativeLayout>
-</FrameLayout>
+</RelativeLayout>

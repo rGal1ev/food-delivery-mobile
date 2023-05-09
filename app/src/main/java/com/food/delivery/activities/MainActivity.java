@@ -7,12 +7,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
 
+import com.food.delivery.App;
 import com.food.delivery.R;
-import com.food.delivery.fragments.AdminProfileFragment;
+import com.food.delivery.fragments.LoginFragment;
 import com.food.delivery.fragments.CartFragment;
 import com.food.delivery.fragments.CatalogFragment;
 
-import com.google.android.material.badge.BadgeDrawable;
+import com.food.delivery.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -20,13 +21,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     BottomNavigationView bottomNavigationView;
     CartFragment cartFragment = new CartFragment();
     CatalogFragment catalogFragment = new CatalogFragment();
-    AdminProfileFragment adminProfileFragment = new AdminProfileFragment();
+    LoginFragment loginFragment = new LoginFragment();
+    ProfileFragment profileFragment = new ProfileFragment();
+    App app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
+        this.app = (App) getApplication();
 
         bottomNavigationView = findViewById(R.id.navbar);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (item.getItemId() == R.id.catalog) {
             getSupportFragmentManager()
                     .beginTransaction()
+                    .setCustomAnimations(androidx.transition.R.anim.abc_fade_in, androidx.transition.R.anim.abc_fade_out)
                     .replace(R.id.fragmentContainer, catalogFragment)
                     .commit();
 
@@ -49,15 +55,27 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         } else if (item.getItemId() == R.id.cart) {
             getSupportFragmentManager()
                     .beginTransaction()
+                    .setCustomAnimations(androidx.transition.R.anim.abc_fade_in, androidx.transition.R.anim.abc_fade_out)
                     .replace(R.id.fragmentContainer, cartFragment)
                     .commit();
 
             return true;
         } else if (item.getItemId() == R.id.admin_panel) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentContainer, adminProfileFragment)
-                    .commit();
+            if (app.getUSER_TOKEN().isEmpty()) {
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(androidx.transition.R.anim.abc_fade_in, androidx.transition.R.anim.abc_fade_out)
+                        .replace(R.id.fragmentContainer, loginFragment)
+                        .commit();
+
+            } else {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(androidx.transition.R.anim.abc_fade_in, androidx.transition.R.anim.abc_fade_out)
+                        .replace(R.id.fragmentContainer, profileFragment)
+                        .commit();
+            }
 
             return true;
         }

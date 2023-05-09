@@ -8,11 +8,23 @@ public class Message {
     @Expose
     private String message;
 
+    @SerializedName("token")
+    @Expose
+    private String token;
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public void setMessage(String message) {
         this.message = message;
     }
 
     public String getMessage() {
         return message;
+    }
+
+    public String getToken() {
+        return token;
     }
 }
