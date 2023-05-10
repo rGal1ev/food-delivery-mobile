@@ -45,12 +45,6 @@ public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.Vi
 
         holder.orderID.setText("Заказ № " + order.getID());
         holder.orderAddress.setText("Адрес доставки: " + order.getDeliveryAddress());
-
-        if (order.getIsFinished()) {
-            holder.orderStatus.setText("Статус: Завершен");
-        } else {
-            holder.orderStatus.setText("Статус: Не завершен");
-        }
     }
 
     @Override
@@ -61,14 +55,12 @@ public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView orderID;
         TextView orderAddress;
-        TextView orderStatus;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             orderID = itemView.findViewById(R.id.order_id);
             orderAddress = itemView.findViewById(R.id.order_address);
-            orderStatus = itemView.findViewById(R.id.order_status);
         }
     }
 }

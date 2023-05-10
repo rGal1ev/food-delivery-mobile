@@ -60,10 +60,26 @@ public class FoodCatalogListAdapter extends RecyclerView.Adapter<FoodCatalogList
 
         holder.foodTitleTV.setText(shorted_title);
         holder.foodDescriptionTV.setText(shorted_description);
-        holder.foodPriceTV.setText(Math.round(foodModel.getPrice()) + " руб.");
+        holder.foodPriceTV.setText(Math.round(foodModel.getPrice()) + " ₽");
 
         if (foodInCart(foodModel)) {
             holder.foodStatusBox.setVisibility(View.VISIBLE);
+
+            holder.foodStatusBox.setOnClickListener(event -> {
+                Food foodInCart = null;
+
+                for (Food food : this.app.getCartState().getBody()) {
+                    if (food.getId() == foodModel.getId()) {
+                        foodInCart = food;
+                    }
+                }
+
+                this.notifyItemChanged(position);
+
+                if (foodInCart != null) {
+                    this.app.getCartState().getBody().remove(foodInCart);
+                }
+            });
         } else {
             holder.foodStatusBox.setVisibility(View.GONE);
         }
@@ -101,8 +117,11 @@ public class FoodCatalogListAdapter extends RecyclerView.Adapter<FoodCatalogList
         TextView food_description_tv = foodCardBottomSheet.findViewById(R.id.food_description);
         Button add_to_cart_button = foodCardBottomSheet.findViewById(R.id.add_to_cart_button);
 
+        TextView food_price = foodCardBottomSheet.findViewById(R.id.food_price);
+
         food_title_tv.setText(foodModel.getTitle());
         food_description_tv.setText(foodModel.getDescription());
+        food_price.setText(Math.round(foodModel.getPrice()) + " ₽");
 
         if (foodInCart(foodModel)) {
             add_to_cart_button.setText("Удалить из корзины");

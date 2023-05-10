@@ -95,7 +95,7 @@
                         android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="В корзине"
+                        android:text="Удалить из корзины"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"/>
                 </RelativeLayout>

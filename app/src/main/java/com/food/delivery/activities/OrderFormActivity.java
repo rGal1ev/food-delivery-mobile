@@ -3,7 +3,9 @@ package com.food.delivery.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.widget.Button;
@@ -39,6 +41,9 @@ public class OrderFormActivity extends AppCompatActivity {
         this.closeOrderFormB = findViewById(R.id.close_form_b);
 
         this.closeOrderFormB.setOnClickListener(view -> {
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("result", 1);
+            setResult(Activity.RESULT_OK, returnIntent);
             finish();
         });
 
@@ -71,6 +76,10 @@ public class OrderFormActivity extends AppCompatActivity {
 
                             if (responseCode == 200) {
                                 app.getCartState().getBody().clear();
+
+                                Intent returnIntent = new Intent();
+                                returnIntent.putExtra("result", 0);
+                                setResult(Activity.RESULT_OK, returnIntent);
                                 finish();
                             }
                         }

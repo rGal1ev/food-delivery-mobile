@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ import com.food.delivery.R;
 import com.food.delivery.activities.OrderFormActivity;
 import com.food.delivery.adapters.FoodCartListAdapter;
 import com.food.delivery.models.network.Food;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -37,6 +39,7 @@ public class CartFragment extends Fragment {
     private TextView totalFoodPriceTV;
     private TextView fragmentHeaderTV;
     private Button openMakeOrderFormB;
+    View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cart, container, false);
+        this.view = inflater.inflate(R.layout.fragment_cart, container, false);
 
         this.emptyCartTitle = view.findViewById(R.id.empty_cart_title);
         this.emptyCartSubTitle = view.findViewById(R.id.empty_cart_subtitle);
@@ -64,7 +67,7 @@ public class CartFragment extends Fragment {
                     snackbar.show();
                 } else {
                     Intent intent = new Intent(getActivity().getApplicationContext(), OrderFormActivity.class);
-                    startActivity(intent, null);
+                    startActivityForResult(intent, 200);
                 }
             }
         });
@@ -83,6 +86,37 @@ public class CartFragment extends Fragment {
         updateBottomCartInfo();
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        int result = data.getExtras().getInt("result");
+
+        if (result == 0) {
+            if (this.app.getCartState().getBody().size() != 0) {
+                this.foodCartListRecyclerView = view.findViewById(R.id.food_cart_rv);
+
+                ArrayList<Food> foodList = this.app.getCartState().getBody();
+                renderFoodCartList(foodList, view.getContext());
+                setCartIsEmptyGone();
+
+            } else {
+                setCartIsEmptyVisible();
+            }
+        }
+
+        updateBottomCartInfo();
+
+        if (this.app.getCartState().getBody().size() != 0) {
+            BadgeDrawable foodCountBadge = bottomNavigationView.getOrCreateBadge(R.id.cart);
+            foodCountBadge.setVisible(true);
+            foodCountBadge.setNumber(this.app.getCartState().getBody().size());
+        } else {
+            BadgeDrawable foodCountBadge = bottomNavigationView.getOrCreateBadge(R.id.cart);
+            foodCountBadge.setVisible(false);
+        }
     }
 
     public void renderFoodCartList(ArrayList<Food> foodList, Context context) {
