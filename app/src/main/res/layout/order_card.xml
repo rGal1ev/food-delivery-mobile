@@ -35,6 +35,7 @@
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:layout_width="100dp"
+                app:trackCornerRadius="10dp"
                 android:layout_height="wrap_content"
                 android:indeterminate="true" />
 
