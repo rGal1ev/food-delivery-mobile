@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.food.delivery.App;
@@ -38,6 +39,7 @@ public class CartFragment extends Fragment {
     private TextView totalFoodCountTV;
     private TextView totalFoodPriceTV;
     private TextView fragmentHeaderTV;
+    private RelativeLayout successOrderMessage;
     private Button openMakeOrderFormB;
     View view;
 
@@ -59,6 +61,9 @@ public class CartFragment extends Fragment {
         this.totalFoodPriceTV = view.findViewById(R.id.total_food_price);
         this.openMakeOrderFormB = view.findViewById(R.id.open_order_form_b);
         this.fragmentHeaderTV = view.findViewById(R.id.header_title);
+        this.successOrderMessage = view.findViewById(R.id.success_order_message);
+
+        successOrderMessage.setVisibility(View.GONE);
 
         openMakeOrderFormB.setOnClickListener(event -> {
             if (!(this.app.getCartState().getBody().size() == 0)) {
@@ -92,30 +97,35 @@ public class CartFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        int result = data.getExtras().getInt("result");
+        if (data != null) {
+            int result = data.getExtras().getInt("result");
 
-        if (result == 0) {
-            if (this.app.getCartState().getBody().size() != 0) {
-                this.foodCartListRecyclerView = view.findViewById(R.id.food_cart_rv);
+            if (result == 0) {
+                if (this.app.getCartState().getBody().size() != 0) {
+                    this.foodCartListRecyclerView = view.findViewById(R.id.food_cart_rv);
 
-                ArrayList<Food> foodList = this.app.getCartState().getBody();
-                renderFoodCartList(foodList, view.getContext());
-                setCartIsEmptyGone();
+                    ArrayList<Food> foodList = this.app.getCartState().getBody();
+                    renderFoodCartList(foodList, view.getContext());
+                    setCartIsEmptyGone();
 
-            } else {
-                setCartIsEmptyVisible();
+                } else {
+                    successOrderMessage.setVisibility(View.VISIBLE);
+                    emptyCartTitle.setVisibility(View.GONE);
+                    emptyCartSubTitle.setVisibility(View.GONE);
+//                setCartIsEmptyVisible();
+                }
             }
-        }
 
-        updateBottomCartInfo();
+            updateBottomCartInfo();
 
-        if (this.app.getCartState().getBody().size() != 0) {
-            BadgeDrawable foodCountBadge = bottomNavigationView.getOrCreateBadge(R.id.cart);
-            foodCountBadge.setVisible(true);
-            foodCountBadge.setNumber(this.app.getCartState().getBody().size());
-        } else {
-            BadgeDrawable foodCountBadge = bottomNavigationView.getOrCreateBadge(R.id.cart);
-            foodCountBadge.setVisible(false);
+            if (this.app.getCartState().getBody().size() != 0) {
+                BadgeDrawable foodCountBadge = bottomNavigationView.getOrCreateBadge(R.id.cart);
+                foodCountBadge.setVisible(true);
+                foodCountBadge.setNumber(this.app.getCartState().getBody().size());
+            } else {
+                BadgeDrawable foodCountBadge = bottomNavigationView.getOrCreateBadge(R.id.cart);
+                foodCountBadge.setVisible(false);
+            }
         }
     }
 

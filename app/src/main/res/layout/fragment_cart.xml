@@ -57,6 +57,44 @@
             android:layout_height="match_parent"
             android:layout_above="@id/open_order_form_b"/>
 
+        <RelativeLayout
+            android:id="@+id/success_order_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/done_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/done"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:id="@+id/order_success_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Заказ был успешно отправлен"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_below="@id/done_image"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_below="@id/order_success_title"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Спасибо, что выбрали наш ресторан"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/empty_cart_title"
             android:layout_width="wrap_content"

@@ -23,6 +23,32 @@
         android:layout_marginBottom="10dp"
         android:text="" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profile_info_button"
+        android:layout_alignParentRight="true"
+        android:layout_width="50dp"
+        android:clickable="true"
+        android:elevation="0dp"
+        app:cardElevation="0dp"
+        android:layout_height="50dp"
+        app:cardBackgroundColor="@color/light_gray"
+        app:cardCornerRadius="100dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/dark_profile" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/profile_order_tablayout_container"
@@ -69,8 +95,7 @@
         <FrameLayout
             android:id="@+id/profile_orders_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/light_gray" />
+            android:layout_height="match_parent"/>
 
     </androidx.cardview.widget.CardView>
 

@@ -5,10 +5,13 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.food.delivery.App;
@@ -30,6 +33,7 @@ public class ProfileCurrentOrderFragment extends Fragment {
     ArrayList<Order> currentOrderList = new ArrayList<>();
     RecyclerView recyclerView;
     TextView title;
+    ProgressBar progressBar;
 
     public static ProfileCurrentOrderFragment newInstance() {
         ProfileCurrentOrderFragment fragment = new ProfileCurrentOrderFragment();
@@ -51,8 +55,24 @@ public class ProfileCurrentOrderFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.rv);
         title = view.findViewById(R.id.title);
+        progressBar = view.findViewById(R.id.fetching_orders_indicator);
 
         title.setVisibility(View.GONE);
+
+        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.refresh_swipe);
+
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            fetchCurrentOrders();
+            swipeRefreshLayout.setRefreshing(false);
+        });
+
+        fetchCurrentOrders();
+
+        return view;
+    }
+
+    public void fetchCurrentOrders() {
+        progressBar.setVisibility(View.VISIBLE);
 
         NetworkService
                 .getInstance()
@@ -82,14 +102,16 @@ public class ProfileCurrentOrderFragment extends Fragment {
                         System.out.println(t.getMessage());
                     }
                 });
-
-        return view;
     }
 
     public void renderCurrentOrderList() {
+        progressBar.setVisibility(View.GONE);
+
         OrdersListAdapter foodCatalogListAdapter = new OrdersListAdapter(getContext(), currentOrderList);
 
+        recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.scheduleLayoutAnimation();
         recyclerView.setAdapter(foodCatalogListAdapter);
     }
 }

@@ -30,10 +30,11 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_centerVertical="true"
-                android:id="@+id/password_container"
+                android:id="@+id/search_food_container"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:hint="Найти товар"
+                app:endIconMode="clear_text"
                 app:startIconDrawable="@drawable/search"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
@@ -51,10 +52,29 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/food_list_rv"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/food_list_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/not_found_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ничего не найдено"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+
+
+
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

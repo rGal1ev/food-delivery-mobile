@@ -83,11 +83,11 @@ public class ProfileFragment extends Fragment {
                         break;
 
                     case 1:
-//                        fragmentManager
-//                                .beginTransaction()
-//                                .setCustomAnimations(androidx.transition.R.anim.abc_fade_in, androidx.transition.R.anim.abc_fade_out)
-//                                .replace(R.id.profile_orders_container, ProfileFragment.newInstance())
-//                                .commit();
+                        fragmentManager
+                                .beginTransaction()
+                                .setCustomAnimations(androidx.transition.R.anim.abc_fade_in, androidx.transition.R.anim.abc_fade_out)
+                                .replace(R.id.profile_orders_container, OrdersHistoryFragment.newInstance())
+                                .commit();
 
                         break;
                 }
