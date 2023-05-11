@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -49,55 +50,6 @@ public class CatalogFragment extends Fragment {
     private BottomNavigationView bottomNavigationView;
 
     private TextView notFoundFoodText;
-
-    TextWatcher textWatcher = new TextWatcher() {
-        @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-        @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-        private Timer timer = new Timer();
-        private final long DELAY = 1000;
-        @Override
-        public void afterTextChanged(Editable s) {
-            String searchText = s.toString();
-
-            timer.cancel();
-            timer = new Timer();
-
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    getActivity().runOnUiThread(() -> {
-                        if (!searchText.isEmpty()) {
-                            searchedFoodList.clear();
-
-                            for (Food food : foodList) {
-                                if (food.getTitle().toLowerCase().contains(searchText.toLowerCase()) || food.getDescription().toLowerCase().contains(searchText.toLowerCase())) {
-                                    searchedFoodList.add(food);
-                                }
-                            }
-
-                            if (searchedFoodList.size() != 0) {
-                                notFoundFoodText.setVisibility(View.GONE);
-
-                                foodCatalogListRecyclerView.setVisibility(View.VISIBLE);
-                                renderFoodCatalogList(view.getContext(), searchedFoodList, foodCatalogListRecyclerView);
-
-                            } else {
-                                foodCatalogListRecyclerView.setVisibility(View.GONE);
-                                notFoundFoodText.setVisibility(View.VISIBLE);
-                            }
-
-                        } else {
-                            foodCatalogListRecyclerView.setVisibility(View.VISIBLE);
-                            notFoundFoodText.setVisibility(View.GONE);
-                            renderFoodCatalogList(view.getContext(), foodList, foodCatalogListRecyclerView);
-                        }
-                    });
-                }
-
-            }, DELAY);
-        }
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -135,7 +87,51 @@ public class CatalogFragment extends Fragment {
         }
 
         TextInputEditText searchField = view.findViewById(R.id.search_field);
-        searchField.addTextChangedListener(textWatcher);
+        TextInputLayout searchFieldLayout = view.findViewById(R.id.search_food_container);
+
+        searchFieldLayout.setEndIconOnClickListener(v -> {
+            searchField.getText().clear();
+
+            foodCatalogListRecyclerView.setVisibility(View.VISIBLE);
+            notFoundFoodText.setVisibility(View.GONE);
+            renderFoodCatalogList(view.getContext(), foodList, foodCatalogListRecyclerView);
+        });
+
+        searchField.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                String searchText = searchField.getText().toString();
+
+                if (!searchText.isEmpty()) {
+                    searchedFoodList.clear();
+
+                    for (Food food : foodList) {
+                        if (food.getTitle().toLowerCase().contains(searchText.toLowerCase()) || food.getDescription().toLowerCase().contains(searchText.toLowerCase())) {
+                            searchedFoodList.add(food);
+                        }
+                    }
+
+                    if (searchedFoodList.size() != 0) {
+                        notFoundFoodText.setVisibility(View.GONE);
+
+                        foodCatalogListRecyclerView.setVisibility(View.VISIBLE);
+                        renderFoodCatalogList(view.getContext(), searchedFoodList, foodCatalogListRecyclerView);
+
+                    } else {
+                        foodCatalogListRecyclerView.setVisibility(View.GONE);
+                        notFoundFoodText.setVisibility(View.VISIBLE);
+                    }
+
+                } else {
+                    foodCatalogListRecyclerView.setVisibility(View.VISIBLE);
+                    notFoundFoodText.setVisibility(View.GONE);
+                    renderFoodCatalogList(view.getContext(), foodList, foodCatalogListRecyclerView);
+                }
+
+                return true;
+            }
+
+            return false;
+        });
 
         return view;
     }
