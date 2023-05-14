@@ -106,7 +106,7 @@ public class FoodCatalogListAdapter extends RecyclerView.Adapter<FoodCatalogList
     }
 
     private void showFoodCardBottomSheet(Food foodModel, int position) {
-        final BottomSheetDialog foodCardBottomSheet = new BottomSheetDialog(context);
+        BottomSheetDialog foodCardBottomSheet = new BottomSheetDialog(context);
         foodCardBottomSheet.setContentView(R.layout.food_card_bottom_sheet);
 
         ImageView food_iv = foodCardBottomSheet.findViewById(R.id.food_image);
@@ -189,6 +189,8 @@ public class FoodCatalogListAdapter extends RecyclerView.Adapter<FoodCatalogList
                 .centerCrop()
                 .into(food_iv);
 
+        foodCardBottomSheet.setCanceledOnTouchOutside(true);
+        foodCardBottomSheet.setCancelable(true);
         foodCardBottomSheet.show();
     }
 

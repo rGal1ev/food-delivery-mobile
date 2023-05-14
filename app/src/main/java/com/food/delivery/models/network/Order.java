@@ -3,6 +3,8 @@ package com.food.delivery.models.network;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Order {
     @SerializedName("id")
     @Expose
@@ -10,6 +12,10 @@ public class Order {
     @SerializedName("public_id")
     @Expose
     private String publicID;
+
+    @SerializedName("cart")
+    @Expose
+    private List<Food> cart;
 
     @SerializedName("delivery_address")
     @Expose

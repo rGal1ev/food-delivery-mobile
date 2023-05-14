@@ -25,11 +25,13 @@ import retrofit2.Response;
 
 public class LoginFragment extends Fragment {
     App app;
+    String messageText = "";
 
     public LoginFragment() {}
 
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
+
         return fragment;
     }
 
@@ -46,15 +48,28 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         Button loginButton = view.findViewById(R.id.login_button);
+        Button registerButton = view.findViewById(R.id.register_button);
+
+        registerButton.setOnClickListener(event -> {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentManager
+                    .beginTransaction()
+                    .setCustomAnimations(androidx.transition.R.anim.abc_fade_in, androidx.transition.R.anim.abc_fade_out)
+                    .replace(R.id.fragmentContainer, RegisterFragment.newInstance())
+                    .commit();
+        });
+
         TextInputEditText loginField = view.findViewById(R.id.login_field);
         TextInputEditText passwordField = view.findViewById(R.id.password_field);
-
-        int USER_ID = this.app.getUSER_ID();
-        String USER_TOKEN = this.app.getUSER_TOKEN();
 
         loginButton.setOnClickListener(event -> {
             String login = loginField.getText().toString();
             String password = passwordField.getText().toString();
+
+            if (login.isEmpty() || password.isEmpty()) {
+                Snackbar snackbar = Snackbar.make(view, "Заполните все поля", Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
 
             RequestBody requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)

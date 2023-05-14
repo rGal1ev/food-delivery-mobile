@@ -20,17 +20,21 @@ import retrofit2.http.Path;
 public interface Routes {
 
     @GET("/get/food")
-    public Call<List<Food>> getFoodList();
+    Call<List<Food>> getFoodList();
 
     @POST("/add/order")
-    public Call<Message> sendOrder(@Header("x-access-token") String USER_TOKEN, @Body OrderPost body);
+    Call<Message> sendOrder(@Header("x-access-token") String USER_TOKEN, @Body OrderPost body);
 
     @POST("/auth/user")
-    public Call<Message> authEmployee(@Body RequestBody body);
+    Call<Message> authEmployee(@Body RequestBody body);
 
     @GET("get/user/current")
-    public Call<User> getCurrentUser(@Header("x-access-token") String USER_TOKEN);
+    Call<User> getCurrentUser(@Header("x-access-token") String USER_TOKEN);
+
+    @POST("register/user")
+    Call<Message> registerUser(@Body RequestBody body);
+
 
     @GET("get/current/user/orders")
-    public Call<List<Order>> getCurrentUserOrder(@Header("x-access-token") String USER_TOKEN);
+    Call<List<Order>> getCurrentUserOrder(@Header("x-access-token") String USER_TOKEN);
 }

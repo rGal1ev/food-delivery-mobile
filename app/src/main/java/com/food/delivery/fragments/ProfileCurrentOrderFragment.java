@@ -73,6 +73,7 @@ public class ProfileCurrentOrderFragment extends Fragment {
 
     public void fetchCurrentOrders() {
         progressBar.setVisibility(View.VISIBLE);
+        currentOrderList.clear();
 
         NetworkService
                 .getInstance()
