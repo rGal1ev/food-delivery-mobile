@@ -3,16 +3,11 @@ package com.food.delivery.fragments;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,15 +21,12 @@ import com.food.delivery.R;
 import com.food.delivery.adapters.FoodCatalogListAdapter;
 import com.food.delivery.models.network.Food;
 import com.food.delivery.network.NetworkService;
-import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -139,7 +131,7 @@ public class CatalogFragment extends Fragment {
     public void renderFoodCatalogList(Context context, ArrayList<Food> foodList, RecyclerView foodRecyclerView) {
         FoodCatalogListAdapter foodCatalogListAdapter = new FoodCatalogListAdapter(context, foodList, this.app, bottomNavigationView);
 
-        foodRecyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation));
+        foodRecyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation));
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         foodRecyclerView.scheduleLayoutAnimation();

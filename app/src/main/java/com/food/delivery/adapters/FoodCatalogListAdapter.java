@@ -189,8 +189,6 @@ public class FoodCatalogListAdapter extends RecyclerView.Adapter<FoodCatalogList
                 .centerCrop()
                 .into(food_iv);
 
-        foodCardBottomSheet.setCanceledOnTouchOutside(true);
-        foodCardBottomSheet.setCancelable(true);
         foodCardBottomSheet.show();
     }
 

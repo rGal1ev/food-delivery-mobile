@@ -50,11 +50,8 @@ public class FoodCartListAdapter extends RecyclerView.Adapter<FoodCartListAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Food foodModel = foodList.get(position);
 
-        String shorted_title = foodModel.getTitle().substring(0, Math.min(foodModel.getTitle().length(), 20)) + "...";
-        String shorted_description = foodModel.getDescription().substring(0, Math.min(foodModel.getDescription().length(), 40)) + "...";
-
-        holder.foodTitleTV.setText(shorted_title);
-        holder.foodDescriptionTV.setText(shorted_description);
+        holder.foodTitleTV.setText(foodModel.getTitle());
+        holder.foodDescriptionTV.setText(foodModel.getDescription());
         holder.foodCountTV.setText(String.valueOf(foodModel.getCount()));
         holder.foodTotalItemPriceTV.setText(Math.round(foodModel.getPrice() * foodModel.getCount()) + " руб.");
 
